@@ -1,28 +1,27 @@
-import { useEffect, useState } from 'react';
+import { GetStaticProps } from 'next';
 import { PostData } from '../domain/posts/posts';
+import HomePage from 'containers/HomePage';
+import { useState } from 'react';
 
-const getPost = async (): Promise<PostData[]> => {
-  const post = await fetch('https://secure-oasis-88915.herokuapp.com/posts');
-  const data = await post.json();
+const getPosts = async (): Promise<PostData[]> => {
+  const posts = await fetch('https://secure-oasis-88915.herokuapp.com/posts');
+  const data = await posts.json();
   return data;
 };
 
-function Post() {
-  const [posts, setPosts] = useState<PostData[]>([]);
+export type PostProps = {
+  res: PostData[];
+};
 
-  useEffect(() => {
-    getPost().then((response) => setPosts(response));
-  }, []);
-
-  return (
-    <div>
-      <ul>
-        {posts.map((item) => (
-          <li key={item.title}>{item.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
+function Posts({ res }: PostProps) {
+  return <HomePage posts={res} />;
 }
 
-export default Post;
+export default Posts;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await getPosts();
+  return {
+    props: { res },
+  };
+};
