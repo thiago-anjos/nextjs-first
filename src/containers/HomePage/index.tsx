@@ -7,6 +7,7 @@ import { PostData } from 'domain/posts/posts';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import Link from 'next/link';
 
 interface HomePageProps {
   posts: PostData[];
@@ -15,7 +16,18 @@ interface HomePageProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.grey[900],
+      display: 'flex',
+      justifyContent: 'center',
+      '& p': {
+        color: theme.palette.primary.light,
+      },
+      '& span': {
+        color: theme.palette.primary.main,
+      },
+    },
+    containerBox: {
+      maxWidth: '800px',
     },
   }),
 );
@@ -25,13 +37,26 @@ function HomePage({ posts }: HomePageProps) {
   return (
     <Grid container wrap="nowrap" className={classes.root}>
       {posts.map((item, index) => (
-        <Box key={index} width={210} marginRight={0.5} my={5}>
+        <Box
+          key={index}
+          width={210}
+          marginRight={0.5}
+          my={5}
+          className={classes.containerBox}
+        >
           {item ? (
-            <img
-              style={{ width: 210, height: 118 }}
-              alt={item.title}
-              src={item.cover.formats.thumbnail.url}
-            />
+            <Link
+              href={{
+                pathname: '/posts/[id]',
+                query: { id: item.id },
+              }}
+            >
+              <img
+                style={{ width: 210, height: 118 }}
+                alt={item.title}
+                src={item.cover.formats.thumbnail.url}
+              />
+            </Link>
           ) : (
             <Skeleton variant="rect" width={210} height={118} />
           )}
@@ -45,14 +70,14 @@ function HomePage({ posts }: HomePageProps) {
                 variant="caption"
                 color="textSecondary"
               >
-                {item.channel}
+                {item.author ? item.author.name : 'Sem autor'}
               </Typography>
               <Typography variant="caption" color="textSecondary">
-                {`Categoria: ${item.category.name} • Data: ${format(
-                  new Date(item.created_at),
-                  'dd-MM-yyyy',
-                  { locale: ptBR },
-                )}`}
+                {`Categoria: ${
+                  item.category ? item.category.name : 'Sem categoria'
+                } • Data: ${format(new Date(item.created_at), 'dd-MM-yyyy', {
+                  locale: ptBR,
+                })}`}
               </Typography>
             </Box>
           ) : (

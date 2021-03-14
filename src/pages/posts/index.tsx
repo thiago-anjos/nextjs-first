@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next';
-import { PostData } from '../domain/posts/posts';
+import { PostData } from '../../domain/posts/posts';
 import HomePage from 'containers/HomePage';
-import { useState } from 'react';
 
 const getPosts = async (): Promise<PostData[]> => {
   const posts = await fetch('https://secure-oasis-88915.herokuapp.com/posts');
@@ -23,5 +22,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const res = await getPosts();
   return {
     props: { res },
+    revalidate: 10, // In seconds
   };
 };
