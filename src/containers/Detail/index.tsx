@@ -13,10 +13,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     padding: theme.spacing(2),
     boxShadow: theme.shadows[3],
-    marginTop: theme.spacing(2),
   },
   title: {
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.light,
   },
   content: {
     paddingTop: theme.spacing(2),

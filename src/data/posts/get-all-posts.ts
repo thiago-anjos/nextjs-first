@@ -2,9 +2,10 @@ import { PostData } from 'domain/posts/posts';
 import { POSTS_URL } from 'config/app-config';
 import { fetchData } from 'utils/fetch-data';
 
-const getPost = async (): Promise<PostData[]> => {
-  const posts = await fetchData<PostData[]>(POSTS_URL);
+const getAllPosts = async (query = ''): Promise<PostData[]> => {
+  const url = `${POSTS_URL}?&${query}`;
+  const posts = await fetchData<PostData[]>(url);
   return posts;
 };
 
-export default getPost;
+export default getAllPosts;

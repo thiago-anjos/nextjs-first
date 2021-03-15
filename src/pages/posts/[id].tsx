@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { PostData } from '../../domain/posts/posts';
 import PostDetail from 'containers/Detail';
-import { useRouter } from 'next/router';
 
 const getPosts = async ({ id }): Promise<PostData> => {
   const posts = await fetch(
