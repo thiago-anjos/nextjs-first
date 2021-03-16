@@ -67,8 +67,8 @@ function HomePage({ posts }: HomePageProps) {
             {item ? (
               <Link
                 href={{
-                  pathname: '/posts/[id]',
-                  query: { id: item.id },
+                  pathname: '/post/[slug]',
+                  query: { slug: item.slug },
                 }}
               >
                 <a className={classes.link}>
