@@ -2,7 +2,7 @@ import React from 'react';
 import { PostData } from 'domain/posts/posts';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import createMarkup from 'utils/markup-sanitize';
-
+import DateAvatar from 'components/Date';
 interface HomePageProps {
   post: PostData;
 }
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   content: {
     paddingTop: theme.spacing(2),
   },
+  image: {
+    width: '400px',
+    height: 'auto',
+  },
 }));
 
 function PostDetail({ post }: HomePageProps) {
@@ -31,7 +35,12 @@ function PostDetail({ post }: HomePageProps) {
       <Typography variant="h2" className={classes.title}>
         {post.title}
       </Typography>
-      <img src={post.cover.formats.large.url} alt={post.title} />
+      <img
+        src={post.cover.formats.medium.url}
+        alt={post.title}
+        className={classes.image}
+      />
+      <DateAvatar date={post.created_at} />
       <Typography
         className={classes.content}
         dangerouslySetInnerHTML={createMarkup(post.content)}
