@@ -3,6 +3,7 @@ import { PostData } from 'domain/posts/posts';
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import createMarkup from 'utils/markup-sanitize';
 import DateAvatar from 'components/Date';
+import Comments from 'Comments';
 interface HomePageProps {
   post: PostData;
 }
@@ -45,6 +46,7 @@ function PostDetail({ post }: HomePageProps) {
         className={classes.content}
         dangerouslySetInnerHTML={createMarkup(post.content)}
       ></Typography>
+      <Comments slug={post.slug} title={post.title} />
     </Container>
   );
 }
