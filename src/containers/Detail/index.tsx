@@ -38,7 +38,7 @@ function PostDetail({ post }: HomePageProps) {
 
   const image = post?.cover?.formats?.small?.url;
 
-  const category = post.category.name;
+  const category = post?.category?.name;
 
   return (
     <Container className={classes.root}>
@@ -57,7 +57,7 @@ function PostDetail({ post }: HomePageProps) {
       </Typography>
       <img src={image} alt={post.title} className={classes.image} />
       <Box>
-        Publicado em {formatDate(post.created_at)} por {post.author.name} |
+        Publicado em {formatDate(post.created_at)} por {post?.author?.name} |
         <Link href={`/categories/${category}`}>{category}</Link>
       </Box>
       <Typography
