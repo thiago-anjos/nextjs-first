@@ -8,6 +8,8 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
 import Link from 'next/link';
+import Head from 'next/head';
+import { SITE_NAME } from 'config/app-config';
 
 interface HomePageProps {
   posts: PostData[];
@@ -55,6 +57,10 @@ function HomePage({ posts }: HomePageProps) {
   const classes = useStyles();
   return (
     <Grid container wrap="nowrap" className={classes.root}>
+      <Head>
+        <title>{SITE_NAME}</title>
+        <meta name="description" content="Este é meu site" />
+      </Head>
       <Container className={classes.containerItens}>
         {posts.map((item, index) => (
           <Box

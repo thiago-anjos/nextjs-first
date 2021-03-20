@@ -4,7 +4,10 @@ import { Container, makeStyles, Typography } from '@material-ui/core';
 import createMarkup from 'utils/markup-sanitize';
 import DateAvatar from 'components/Date';
 import Comments from 'Comments';
-import { url } from 'node:inspector';
+import Head from 'next/head';
+import { removeHtml } from 'utils/remove-html';
+import { SITE_NAME } from 'config/app-config';
+
 interface HomePageProps {
   post: PostData;
 }
@@ -36,6 +39,16 @@ function PostDetail({ post }: HomePageProps) {
 
   return (
     <Container className={classes.root}>
+      <Head>
+        <title>
+          {post.title} - {SITE_NAME}
+        </title>
+        <meta
+          name="description"
+          content={removeHtml(post.content).slice(0, 150)}
+        />
+      </Head>
+
       <Typography variant="h2" className={classes.title}>
         {post.title}
       </Typography>
