@@ -1,12 +1,13 @@
 import React from 'react';
 import { PostData } from 'domain/posts/posts';
-import { Container, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, makeStyles, Typography } from '@material-ui/core';
 import createMarkup from 'utils/markup-sanitize';
-import DateAvatar from 'components/Date';
 import Comments from 'Comments';
 import Head from 'next/head';
 import { removeHtml } from 'utils/remove-html';
 import { SITE_NAME } from 'config/app-config';
+import Link from 'next/link';
+import formatDate from 'utils/formate-date';
 
 interface HomePageProps {
   post: PostData;
@@ -37,6 +38,8 @@ function PostDetail({ post }: HomePageProps) {
 
   const image = post?.cover?.formats?.small?.url;
 
+  const category = post.category.name;
+
   return (
     <Container className={classes.root}>
       <Head>
@@ -53,7 +56,10 @@ function PostDetail({ post }: HomePageProps) {
         {post.title}
       </Typography>
       <img src={image} alt={post.title} className={classes.image} />
-      <DateAvatar date={post.created_at} />
+      <Box>
+        Publicado em {formatDate(post.created_at)} por {post.author.name} |
+        <Link href={`/categories/${category}`}>{category}</Link>
+      </Box>
       <Typography
         className={classes.content}
         dangerouslySetInnerHTML={createMarkup(post.content)}

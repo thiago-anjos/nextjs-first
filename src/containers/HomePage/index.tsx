@@ -13,6 +13,7 @@ import { SITE_NAME } from 'config/app-config';
 
 interface HomePageProps {
   posts: PostData[];
+  category?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function HomePage({ posts }: HomePageProps) {
+function HomePage({ posts, category }: HomePageProps) {
   const classes = useStyles();
   return (
     <Grid container wrap="nowrap" className={classes.root}>
@@ -62,6 +63,7 @@ function HomePage({ posts }: HomePageProps) {
         <meta name="description" content="Este é meu site" />
       </Head>
       <Container className={classes.containerItens}>
+        {category && <Typography>Categoria: {category}</Typography>}
         {posts.map((item, index) => (
           <Box
             key={index}
