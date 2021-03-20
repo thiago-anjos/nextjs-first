@@ -4,6 +4,7 @@ import { Container, makeStyles, Typography } from '@material-ui/core';
 import createMarkup from 'utils/markup-sanitize';
 import DateAvatar from 'components/Date';
 import Comments from 'Comments';
+import { url } from 'node:inspector';
 interface HomePageProps {
   post: PostData;
 }
@@ -31,16 +32,14 @@ const useStyles = makeStyles((theme) => ({
 function PostDetail({ post }: HomePageProps) {
   const classes = useStyles();
 
+  const image = post?.cover?.formats?.small?.url;
+
   return (
     <Container className={classes.root}>
       <Typography variant="h2" className={classes.title}>
         {post.title}
       </Typography>
-      <img
-        src={post.cover.formats.medium.url}
-        alt={post.title}
-        className={classes.image}
-      />
+      <img src={image} alt={post.title} className={classes.image} />
       <DateAvatar date={post.created_at} />
       <Typography
         className={classes.content}
