@@ -37,9 +37,9 @@ function PostDetail({ post }: HomePageProps) {
   const classes = useStyles();
 
   const image = post?.cover?.formats?.small?.url;
+  const author = post?.author?.name;
 
   const category = post?.category?.name;
-
   return (
     <Container className={classes.root}>
       <Head>
@@ -57,8 +57,10 @@ function PostDetail({ post }: HomePageProps) {
       </Typography>
       <img src={image} alt={post.title} className={classes.image} />
       <Box>
-        Publicado em {formatDate(post.created_at)} por {post?.author?.name} |
-        <Link href={`/categories/${category}`}>{category}</Link>
+        <Typography>
+          Publicado em {formatDate(post.created_at)} por {author}
+        </Typography>
+        {category && <Link href={`/categories/${category}`}>{category}</Link>}
       </Box>
       <Typography
         className={classes.content}
