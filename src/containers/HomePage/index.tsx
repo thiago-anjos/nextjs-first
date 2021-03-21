@@ -59,7 +59,7 @@ function HomePage({ posts, category }: HomePageProps) {
   return (
     <Grid container wrap="nowrap" className={classes.root}>
       <Head>
-        <title>{SITE_NAME}</title>
+        :<title>{category ? ` ${category} - ${SITE_NAME}` : SITE_NAME}</title>
         <meta name="description" content="Este é meu site" />
       </Head>
       <Container className={classes.containerItens}>
