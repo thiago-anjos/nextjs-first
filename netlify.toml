@@ -1,4 +1,4 @@
 [build]
   command   = "yarn run build"
-  functions = "out_functions"
-  publish   = "out"
+  functions = "/opt/build/repo/out_function"
+  publish   = "/opt/build/repo/out"
