@@ -1,5 +1,5 @@
 [build]
   command   = "npm run build"
   functions = "out_functions"
-  publish = "https://keen-sammet-dd6013.netlify.app/"
+  publish = "_site"
 
