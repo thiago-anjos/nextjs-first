@@ -17,6 +17,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const res = await getAllPosts('_sort=id:desc&_start=0&_limit=30');
   return {
     props: { res },
-    // revalidate: 600,  // Eu não preciso atualizar este blog (por isso comentei)
+    revalidate: 60, // Eu não preciso atualizar este blog (por isso comentei)
   };
 };
