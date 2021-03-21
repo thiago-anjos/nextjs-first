@@ -1,4 +1,3 @@
 [build]
-  command   = "yarn run build"
-  functions = "/opt/build/repo/out_function"
-  publish   = "/opt/build/repo/out"
+  command = "npm run build && npm run export"
+  publish = "out"
