@@ -38,8 +38,8 @@ function PostDetail({ post }: HomePageProps) {
 
   const image = post?.cover?.formats?.small?.url;
   const author = post?.author?.name;
-
   const category = post?.category?.name;
+
   return (
     <Container className={classes.root}>
       <Head>
