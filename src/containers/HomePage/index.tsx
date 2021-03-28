@@ -21,7 +21,7 @@ import Pagination from 'components/Pagination';
 interface HomePageProps {
   posts: PostData[];
   category?: string;
-  pagination: PaginationData;
+  pagination?: PaginationData;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
