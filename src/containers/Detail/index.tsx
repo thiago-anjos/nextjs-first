@@ -60,7 +60,7 @@ function PostDetail({ post }: HomePageProps) {
         <Typography>
           Publicado em {formatDate(post.created_at)} por {author}
         </Typography>
-        {category && <Link href={`/categories/${category}`}>{category}</Link>}
+        {category && <Link href={`/post/page/1/${category}`}>{category}</Link>}
       </Box>
       <Typography
         className={classes.content}

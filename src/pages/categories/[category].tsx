@@ -15,6 +15,7 @@ function Posts({ posts, category }: CategoryProps) {
 export default Posts;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  console.log(ctx);
   const category = ctx.query.category ? ctx.query.category : '';
   const urlQuery = `_sort=id:desc&_start=0&_limit=30&category.name_contains=${category}`;
   const posts = await getAllPosts(urlQuery);

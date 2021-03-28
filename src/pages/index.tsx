@@ -8,7 +8,11 @@ export type PostProps = {
 };
 
 function Posts({ res }: PostProps) {
-  return <HomePage posts={res} />;
+  return (
+    <>
+      <HomePage posts={res} />]
+    </>
+  );
 }
 
 export default Posts;

@@ -1,19 +1,27 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { PostData } from 'domain/posts/posts';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { makeStyles, Theme, createStyles, Container } from '@material-ui/core';
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  Container,
+  Button,
+} from '@material-ui/core';
 import Link from 'next/link';
 import Head from 'next/head';
 import { SITE_NAME } from 'config/app-config';
+import { PaginationData } from 'domain/pagination';
+import Pagination from 'components/Pagination';
 
 interface HomePageProps {
   posts: PostData[];
   category?: string;
+  pagination: PaginationData;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       justifyContent: 'center',
+      flexDirection: 'column',
       '& p': {
         color: theme.palette.secondary.light,
       },
@@ -54,15 +63,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function HomePage({ posts, category }: HomePageProps) {
+function HomePage({ posts, category, pagination }: HomePageProps) {
   const classes = useStyles();
   return (
-    <Grid container wrap="nowrap" className={classes.root}>
+    <Container className={classes.root}>
       <Head>
-        :<title>{category ? ` ${category} - ${SITE_NAME}` : SITE_NAME}</title>
+        :
+        <title>
+          {category ? ` ${category} - ${SITE_NAME}` : SITE_NAME}{' '}
+          {pagination?.nextPage && `- Página ${pagination.nextPage - 1}`}
+        </title>
         <meta name="description" content="Este é meu site" />
       </Head>
-      <Container className={classes.containerItens}>
+      <Box className={classes.containerItens}>
         {category && <Typography>Categoria: {category}</Typography>}
         {posts.map((item, index) => (
           <Box
@@ -118,8 +131,14 @@ function HomePage({ posts, category }: HomePageProps) {
             )}
           </Box>
         ))}
-      </Container>
-    </Grid>
+      </Box>
+      <Pagination {...pagination} />
+      {pagination?.nextPage && (
+        <Link href="/">
+          <Button>Ver todos os posts</Button>
+        </Link>
+      )}
+    </Container>
   );
 }
 

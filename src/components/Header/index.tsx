@@ -11,6 +11,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import { IconButton } from '@material-ui/core';
 import { ArrowBackIosRounded } from '@material-ui/icons';
+import Link from 'next/link';
 
 interface Props {
   /**
@@ -68,7 +69,11 @@ export default function HeaderElement(props: Props) {
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Typography variant="h6">BLOG STRAPI</Typography>
+          <Link href="/post/page/1">
+            <a>
+              <Typography variant="h6">BLOG STRAPI</Typography>
+            </a>
+          </Link>
           <IconButton onClick={() => history.back()}>
             <ArrowBackIosRounded />
           </IconButton>

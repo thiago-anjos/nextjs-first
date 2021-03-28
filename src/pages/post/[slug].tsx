@@ -19,7 +19,7 @@ function Post({ post }: PostProps) {
     return <Typography>Carregando...</Typography>;
   }
 
-  if (!post) return <Error statusCode={404} />;
+  if (!post?.title) return <Error statusCode={404} />;
 
   return <PostDetail post={post} />;
 }
@@ -39,8 +39,13 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const posts = await getPost(context.params.slug);
+
+  // fix error on page/post
+  const post = posts.length > 0 ? posts[0] : {};
+
   return {
-    props: { post: posts[0] },
+    // props: { post: posts[0] },
+    props: { post: post },
     revalidate: 60, // In seconds
   };
 };
